@@ -4,10 +4,10 @@ import { computed, onMounted, ref } from "vue";
 import { useSDK } from "@/plugins/sdk";
 import {
   DEFAULT_CONTEXT_MENU_PRESET_IDS,
-  PRESET_GROUPS,
   isPresetCategory,
   normalizeCustomPresets,
   normalizeMenuPresetIds,
+  PRESET_GROUPS,
   type PresetCategory,
   type UploadPreset,
 } from "@/presets";
@@ -64,17 +64,19 @@ const presetGroups = computed(() =>
 const filteredGroups = computed(() => {
   const needle = query.value.trim().toLowerCase();
 
-  return presetGroups.value.map((group) => ({
-    ...group,
-    presets:
-      needle.length === 0
-        ? group.presets
-        : group.presets.filter((preset) =>
-            `${preset.label} ${preset.value} ${preset.description}`
-              .toLowerCase()
-              .includes(needle),
-          ),
-  })).filter((group) => group.presets.length > 0);
+  return presetGroups.value
+    .map((group) => ({
+      ...group,
+      presets:
+        needle.length === 0
+          ? group.presets
+          : group.presets.filter((preset) =>
+              `${preset.label} ${preset.value} ${preset.description}`
+                .toLowerCase()
+                .includes(needle),
+            ),
+    }))
+    .filter((group) => group.presets.length > 0);
 });
 
 const copyPreset = async (preset: UploadPreset) => {
@@ -101,15 +103,11 @@ const exportConfig = () => {
     customPresets: customPresets.value,
     menuPresetIds: menuPresetIds.value,
   };
-  const blob = new Blob([JSON.stringify(config, null, 2)], {
-    type: "application/json",
-  });
-  const url = URL.createObjectURL(blob);
+  const encoded = encodeURIComponent(JSON.stringify(config, null, 2));
   const anchor = document.createElement("a");
-  anchor.href = url;
+  anchor.href = `data:application/json;charset=utf-8,${encoded}`;
   anchor.download = "uploadsmith-presets.json";
   anchor.click();
-  URL.revokeObjectURL(url);
 };
 
 const importConfig = async (event: Event) => {
@@ -129,10 +127,13 @@ const importConfig = async (event: Event) => {
     const nextCustomPresets = normalizeCustomPresets(parsed);
     const nextMenuPresetIds = normalizeMenuPresetIds(parsed);
     await savePluginState(nextCustomPresets, nextMenuPresetIds);
-    sdk.window.showToast("Imported UploadSmith presets. Reload Caido to apply context menu order.", {
-      variant: "success",
-      duration: 5000,
-    });
+    sdk.window.showToast(
+      "Imported UploadSmith presets. Reload Caido to apply context menu order.",
+      {
+        variant: "success",
+        duration: 5000,
+      },
+    );
   } catch {
     sdk.window.showToast("Could not import preset JSON", {
       variant: "error",
@@ -141,11 +142,16 @@ const importConfig = async (event: Event) => {
 };
 
 const resetContextMenu = async () => {
-  await savePluginState(customPresets.value, [...DEFAULT_CONTEXT_MENU_PRESET_IDS]);
-  sdk.window.showToast("Context menu defaults restored. Reload Caido to apply menu order.", {
-    variant: "success",
-    duration: 5000,
-  });
+  await savePluginState(customPresets.value, [
+    ...DEFAULT_CONTEXT_MENU_PRESET_IDS,
+  ]);
+  sdk.window.showToast(
+    "Context menu defaults restored. Reload Caido to apply menu order.",
+    {
+      variant: "success",
+      duration: 5000,
+    },
+  );
 };
 
 const saveCustomPresets = async (presets: UploadPreset[]) => {
@@ -172,10 +178,13 @@ const togglePresetMenu = async (preset: UploadPreset, checked: boolean) => {
         : customPreset,
     );
     await savePluginState(nextPresets);
-    sdk.window.showToast("Context menu selection saved. Reload Caido to apply menu order.", {
-      variant: "info",
-      duration: 5000,
-    });
+    sdk.window.showToast(
+      "Context menu selection saved. Reload Caido to apply menu order.",
+      {
+        variant: "info",
+        duration: 5000,
+      },
+    );
     return;
   }
 
@@ -183,10 +192,13 @@ const togglePresetMenu = async (preset: UploadPreset, checked: boolean) => {
     ? [...new Set([...menuPresetIds.value, preset.id])]
     : menuPresetIds.value.filter((id) => id !== preset.id);
   await savePluginState(customPresets.value, nextMenuIds);
-  sdk.window.showToast("Context menu selection saved. Reload Caido to apply menu order.", {
-    variant: "info",
-    duration: 5000,
-  });
+  sdk.window.showToast(
+    "Context menu selection saved. Reload Caido to apply menu order.",
+    {
+      variant: "info",
+      duration: 5000,
+    },
+  );
 };
 
 const onPresetMenuChange = (preset: UploadPreset, event: Event) => {
@@ -223,7 +235,9 @@ const addCustomPreset = async () => {
     label,
     value,
     description:
-      description.length === 0 ? `Custom ${customCategory.value} preset.` : description,
+      description.length === 0
+        ? `Custom ${customCategory.value} preset.`
+        : description,
     showInMenu: customShowInMenu.value,
   };
 
@@ -249,10 +263,13 @@ const removeCustomPreset = async (presetId: string) => {
   await saveCustomPresets(
     customPresets.value.filter((preset) => preset.id !== presetId),
   );
-  sdk.window.showToast("Custom preset removed from the page. Reload Caido to refresh context menu entries.", {
-    variant: "info",
-    duration: 5000,
-  });
+  sdk.window.showToast(
+    "Custom preset removed from the page. Reload Caido to refresh context menu entries.",
+    {
+      variant: "info",
+      duration: 5000,
+    },
+  );
 };
 
 onMounted(() => {
@@ -273,8 +290,8 @@ onMounted(() => {
         <p class="eyebrow">File Upload Helper</p>
         <h1>UploadSmith</h1>
         <p class="summary">
-          Replace selected request text from the Caido context menu, or copy upload
-          testing presets from this page.
+          Replace selected request text from the Caido context menu, or copy
+          upload testing presets from this page.
         </p>
       </div>
       <input
@@ -350,7 +367,11 @@ onMounted(() => {
       </div>
 
       <div class="preset-grid">
-        <article v-for="preset in group.presets" :key="preset.id" class="preset">
+        <article
+          v-for="preset in group.presets"
+          :key="preset.id"
+          class="preset"
+        >
           <div class="preset-main">
             <strong>{{ preset.label }}</strong>
             <code>{{ toDisplayValue(preset.value) }}</code>

@@ -1,8 +1,4 @@
-import {
-  ALL_PRESETS,
-  MAGIC_BYTE_PRESETS,
-  type UploadPreset,
-} from "./presets";
+import { ALL_PRESETS, MAGIC_BYTE_PRESETS, type UploadPreset } from "./presets";
 import type { FrontendSDK } from "./types";
 
 const COMMAND_GROUP_PREFIX = "UploadSmith";
@@ -101,7 +97,9 @@ export const registerUploadSmithCommands = (
     menuPresetIdSet.has(preset.id),
   );
   const menuPresets = [
-    ...builtInMenuPresets.filter((preset) => preset.category === "Content-Type"),
+    ...builtInMenuPresets.filter(
+      (preset) => preset.category === "Content-Type",
+    ),
     ...customMenuPresets.filter((preset) => preset.category === "Content-Type"),
     ...builtInMenuPresets.filter((preset) => preset.category === "Extension"),
     ...customMenuPresets.filter((preset) => preset.category === "Extension"),

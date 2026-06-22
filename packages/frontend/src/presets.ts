@@ -9,7 +9,7 @@ export type UploadPreset = {
   showInMenu?: boolean;
 };
 
-export const CONTENT_TYPE_PRESETS: UploadPreset[] = [
+const CONTENT_TYPE_PRESETS: UploadPreset[] = [
   {
     id: "content-type-image-jpeg",
     category: "Content-Type",
@@ -82,7 +82,7 @@ export const CONTENT_TYPE_PRESETS: UploadPreset[] = [
   },
 ];
 
-export const EXTENSION_PRESETS: UploadPreset[] = [
+const EXTENSION_PRESETS: UploadPreset[] = [
   {
     id: "extension-jpg",
     category: "Extension",
@@ -284,7 +284,8 @@ export const EXTENSION_PRESETS: UploadPreset[] = [
     category: "Extension",
     label: ".php:.jpg",
     value: ".php:.jpg",
-    description: "Colon extension injection pattern used in Windows-oriented tests.",
+    description:
+      "Colon extension injection pattern used in Windows-oriented tests.",
   },
   {
     id: "extension-php-slash-jpg",
@@ -438,10 +439,6 @@ export const DEFAULT_CONTEXT_MENU_PRESET_IDS = [
   "magic-zip",
   "magic-svg",
 ] as const;
-
-export const DEFAULT_CONTEXT_MENU_PRESET_ID_SET = new Set<string>(
-  DEFAULT_CONTEXT_MENU_PRESET_IDS,
-);
 
 export const isPresetCategory = (value: string): value is PresetCategory =>
   value === "Content-Type" || value === "Extension" || value === "Magic Byte";
