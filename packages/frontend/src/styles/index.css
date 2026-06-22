@@ -1,0 +1,270 @@
+@import "./caido.css";
+@import "./primevue.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.uploadsmith {
+  height: 100%;
+  overflow: auto;
+  padding: 24px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-default);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--c-fg-subtle);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.summary {
+  max-width: 720px;
+  margin: 10px 0 0;
+  color: var(--c-fg-muted);
+}
+
+.search {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 6px;
+  padding: 0 12px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-subtle);
+}
+
+.group {
+  margin-top: 24px;
+}
+
+.custom-panel {
+  border: 1px solid var(--c-border-default);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 28px;
+  background: var(--c-bg-subtle);
+}
+
+.custom-panel h3 {
+  margin: 16px 0 10px;
+  font-size: 15px;
+}
+
+.preset-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-actions button {
+  min-height: 34px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 6px;
+  padding: 7px 11px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-default);
+  cursor: pointer;
+}
+
+.preset-actions button:hover {
+  background: var(--c-bg-inset);
+}
+
+.hidden-file {
+  display: none;
+}
+
+.custom-form {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) minmax(180px, 1fr) minmax(180px, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+.custom-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--c-fg-muted);
+  font-size: 13px;
+}
+
+.custom-form .checkbox-row {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  min-height: 38px;
+}
+
+.custom-form .checkbox-row input {
+  width: auto;
+}
+
+.custom-form input,
+.custom-form select,
+.custom-form textarea {
+  width: 100%;
+  border: 1px solid var(--c-border-default);
+  border-radius: 6px;
+  padding: 9px 10px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-default);
+}
+
+.custom-form textarea {
+  resize: vertical;
+}
+
+.custom-form .wide {
+  grid-column: span 1;
+}
+
+.custom-form button {
+  min-height: 38px;
+  border: 1px solid var(--c-border-default);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-default);
+  cursor: pointer;
+}
+
+.custom-form button:hover {
+  background: var(--c-bg-inset);
+}
+
+.group-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.group-heading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.group-heading span {
+  color: var(--c-fg-subtle);
+  font-size: 13px;
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.preset {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  border: 1px solid var(--c-border-default);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--c-bg-subtle);
+}
+
+.preset-main {
+  min-width: 0;
+}
+
+.preset strong,
+.preset code,
+.preset p {
+  display: block;
+}
+
+.preset strong {
+  margin-bottom: 6px;
+}
+
+.preset code {
+  overflow-wrap: anywhere;
+  color: var(--c-fg-default);
+  font-size: 12px;
+}
+
+.preset p {
+  margin: 8px 0 0;
+  color: var(--c-fg-muted);
+  font-size: 13px;
+}
+
+.preset .menu-note {
+  color: var(--c-fg-subtle);
+  font-size: 12px;
+}
+
+.preset .card-checkbox {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: 8px;
+  color: var(--c-fg-subtle);
+  font-size: 12px;
+}
+
+.preset .card-checkbox input {
+  margin: 0;
+}
+
+.preset button {
+  align-self: start;
+  border: 1px solid var(--c-border-default);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--c-fg-default);
+  background: var(--c-bg-default);
+  cursor: pointer;
+}
+
+.preset button:hover {
+  background: var(--c-bg-inset);
+}
+
+.preset button.danger {
+  color: var(--c-fg-danger);
+}
+
+.empty {
+  border: 1px dashed var(--c-border-default);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--c-fg-muted);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .uploadsmith {
+    padding: 16px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-form {
+    grid-template-columns: 1fr;
+  }
+}
