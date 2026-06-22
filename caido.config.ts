@@ -12,7 +12,7 @@ export default defineConfig({
   id,
   name: "UploadSmith",
   description: "File upload testing helper for content types, filename extensions, and magic bytes.",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "Waris Damkham",
   },

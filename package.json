@@ -1,13 +1,12 @@
 {
   "name": "uploadsmith",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ./packages/**/src --fix",
     "knip": "knip",
     "build": "caido-dev build",
-    "postbuild": "cp dist/plugin_package.zip dist/UploadSmith.zip",
     "watch": "caido-dev watch"
   },
   "devDependencies": {

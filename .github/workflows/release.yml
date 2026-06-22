@@ -44,9 +44,10 @@ jobs:
         run: |
           if [[ -z "${{ secrets.PRIVATE_KEY }}" ]]; then
             echo "Set an ed25519 key as PRIVATE_KEY in GitHub Action secret to sign."
+            exit 1
           else
             echo "${{ secrets.PRIVATE_KEY }}" > private_key.pem
-            openssl pkeyutl -sign -inkey private_key.pem -out UploadSmith.zip.sig -rawin -in UploadSmith.zip
+            openssl pkeyutl -sign -inkey private_key.pem -out plugin_package.zip.sig -rawin -in plugin_package.zip
             rm private_key.pem
           fi
 
@@ -54,7 +55,7 @@ jobs:
         id: meta
         working-directory: dist
         run: |
-          VERSION=$(unzip -p UploadSmith.zip manifest.json | jq -r .version)
+          VERSION=$(unzip -p plugin_package.zip manifest.json | jq -r .version)
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Create release
@@ -63,5 +64,5 @@ jobs:
           tag: ${{ steps.meta.outputs.version }}
           commit: ${{ github.sha }}
           body: 'Release ${{ steps.meta.outputs.version }}'
-          artifacts: 'dist/UploadSmith.zip,dist/UploadSmith.zip.sig'
+          artifacts: 'dist/plugin_package.zip,dist/plugin_package.zip.sig'
           immutableCreate: true

@@ -21,12 +21,12 @@ UploadSmith helps bug bounty hunters and penetration testers quickly mutate uplo
 
 ## Installation
 
-Download the latest `UploadSmith.zip` from the [Releases page](../../releases/latest), then install it in Caido:
+Download the latest `plugin_package.zip` from the [Releases page](../../releases/latest), then install it in Caido:
 
 1. Open Caido
 2. Go to `Plugins`
 3. Click `Install Package`
-4. Select `UploadSmith.zip`
+4. Select `plugin_package.zip`
 5. Reload Caido if prompted
 
 ## Usage
@@ -165,7 +165,7 @@ pnpm build
 The installable package is generated at:
 
 ```text
-dist/UploadSmith.zip
+dist/plugin_package.zip
 ```
 
 ## Privacy and Safety
