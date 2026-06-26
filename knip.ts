@@ -5,11 +5,6 @@ const config: RawConfigurationOrFn = {
     ".": {
       entry: ["caido.config.ts", "eslint.config.mjs"],
     },
-    "packages/backend": {
-      entry: ["src/index.ts"],
-      project: ["src/**/*.ts"],
-      ignoreDependencies: ["caido"],
-    },
     "packages/frontend": {
       entry: ["src/index.ts"],
       project: ["src/**/*.{ts,tsx,vue}"],
